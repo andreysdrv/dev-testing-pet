@@ -21,39 +21,41 @@ const QuestionItem: FC<QuestionItemProps> = ({ question }) => {
 	}
 
 	return (
-		<div className='questions__card'>
-			<p>Категория: {question.category}</p>
-			<p>Тип: {question.type}</p>
-			<p>Сложность: {question.difficulty}</p>
-			<h4>Вопрос: {question.question}</h4>
-			<form style={{ display: 'flex', flexDirection: 'column' }}>
-				{[...question.incorrect_answers, question.correct_answer].map(
-					(answer, index) => (
-						<label
-							style={{
-								padding: 10,
-								backgroundColor:
-									isCorrect === null
-										? 'navajowhite'
-										: answer === question.correct_answer
-										? 'green'
-										: 'red',
-								marginBottom: 5,
-								cursor: 'pointer',
-							}}
-							key={index}>
-							<input
-								type='radio'
-								name='answer'
-								disabled={isCorrect != null}
-								onChange={() => setSelectedAnswer(answer)}
-							/>
-							{answer}
-						</label>
-					)
-				)}
-				<button type='submit' onClick={checkAnswer}>
-					check
+		<div className='card'>
+			<ul className='card__head'>
+				<li className='card__item'>Категория: {question.category}</li>
+				<li className='card__item'>Тип: {question.type}</li>
+				<li className='card__item'>Сложность: {question.difficulty}</li>
+				<li className='card__item card__item_font_bold'>{question.question}</li>
+			</ul>
+			<form className='card__form'>
+				<ul className='card__answers'>
+					{[...question.incorrect_answers, question.correct_answer].map(
+						(answer, index) => (
+							<li key={index}>
+								<label
+									className={`card__answer ${
+										isCorrect === null
+											? ''
+											: answer === question.correct_answer
+											? 'card__answer_correct'
+											: 'card__answer_incorrect'
+									}`}>
+									<input
+										className='card__checkbox'
+										type='radio'
+										name='answer'
+										disabled={isCorrect != null}
+										onChange={() => setSelectedAnswer(answer)}
+									/>
+									{answer}
+								</label>
+							</li>
+						)
+					)}
+				</ul>
+				<button className='card__btn' type='submit' onClick={checkAnswer}>
+					Проверить
 				</button>
 			</form>
 		</div>

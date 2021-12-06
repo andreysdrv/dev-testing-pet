@@ -1,0 +1,13 @@
+@font-face {
+	font-family: 'IBMPlexMono';
+	font-style: normal;
+	font-weight: 400;
+	src: url('./IBMPlexMono-Regular.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'IBMPlexMono';
+	font-style: bold;
+	font-weight: 900;
+	src: url('./IBMPlexMono-Bold.ttf') format('truetype');
+}
