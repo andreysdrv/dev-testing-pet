@@ -1,27 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useActions } from '../../hooks/useActions'
 import { useTypeSelector } from '../../hooks/useTypeSelector'
-import { getData } from '../../store/action-creators/questions'
 import { IQuestion } from '../../types/types'
 import List from '../List/List'
 import QuestionItem from '../QuestionItem/QuestionItem'
 
 const App = () => {
-	// const [questionss, setQuestions] = useState<IQuestion[]>([])
-
 	const { questions, loading, error } = useTypeSelector(state => state.questions)
-	const dispatch = useDispatch()
+	const { getData } = useActions()
 
 	useEffect(() => {
-		dispatch(getData())
+		getData()
 	}, [])
 
 	if (loading) {
-		return <h1>Загрузка . . .</h1>
+		return <h1 style={{ backgroundColor: 'red' }}>Загрузка . . .</h1>
 	}
 
 	if (error) {
-		alert(error)
+		return <h1 style={{ backgroundColor: 'red' }}>{error}</h1>
 	}
 
 	return (
