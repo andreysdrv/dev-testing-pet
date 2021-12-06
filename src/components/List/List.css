@@ -1,0 +1,9 @@
+.questions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 394px);
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 8px;
+  justify-content: center;
+  padding: 50px 0;
+}
