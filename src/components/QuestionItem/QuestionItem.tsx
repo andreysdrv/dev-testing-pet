@@ -20,6 +20,14 @@ const QuestionItem: FC<QuestionItemProps> = ({ question }) => {
 		}
 	}
 
+	// TODO: исправить баг, при котором на каждом рендере вызывается эта функция и все время шафлит варианты ответа
+	const pushToRandomIdx = (arr: string[], item: string) => {
+		const newArr = [...arr]
+		const randomIdx = Math.floor(Math.random() * (arr.length + 1))
+		newArr.splice(randomIdx, 0, item)
+		return newArr
+	}
+
 	return (
 		<div className='card'>
 			<ul className='card__head'>
@@ -30,7 +38,7 @@ const QuestionItem: FC<QuestionItemProps> = ({ question }) => {
 			</ul>
 			<form className='card__form'>
 				<ul className='card__answers'>
-					{[...question.incorrect_answers, question.correct_answer].map(
+					{pushToRandomIdx(question.incorrect_answers, question.correct_answer).map(
 						(answer, index) => (
 							<li key={index}>
 								<label
