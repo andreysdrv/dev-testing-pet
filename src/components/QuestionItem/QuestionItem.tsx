@@ -49,12 +49,19 @@ const QuestionItem: FC<QuestionItemProps> = ({ question }) => {
 										onChange={() => setSelectedAnswer(answer)}
 									/>
 									{answer}
+									<span className='checkmark'></span>
 								</label>
 							</li>
 						)
 					)}
 				</ul>
-				<button className='card__btn' type='submit' onClick={checkAnswer}>
+				<button
+					className={`card__btn ${
+						isCorrect != null ? 'card__btn_state_disabled' : ''
+					}`}
+					type='submit'
+					disabled={isCorrect != null}
+					onClick={checkAnswer}>
 					Проверить
 				</button>
 			</form>

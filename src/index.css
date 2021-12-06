@@ -1,6 +1,14 @@
 @import url('./vendor/normalize.css');
 @import url('./vendor/fonts/fonts.css');
 
+:root {
+	--toxic-color: #3f0;
+	--background-gradient-from: #121212;
+	--background-gradient-to: #181818;
+	--hover-gradient-from: #454545;
+	--hover-gradient-to: #212121;
+}
+
 body {
 	background-color: #3e5f39;
 	margin: 0;

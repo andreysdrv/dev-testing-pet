@@ -1,8 +1,12 @@
 .card {
-	background: linear-gradient(171deg, #121212, #181818);
+	background: linear-gradient(
+		171deg,
+		var(--background-gradient-from),
+		var(--background-gradient-to)
+	);
 	border-radius: 15px;
-	padding: 10px;
-	color: #3f0;
+	padding: 20px;
+	color: var(--toxic-color);
 	min-height: 360px;
 	display: flex;
 	flex-direction: column;
@@ -40,14 +44,19 @@
 .card__answer {
 	display: flex;
 	align-items: center;
-	padding: 10px;
+	padding: 10px 40px 10px;
 	font-size: 14px;
 	border-radius: 5px;
+	position: relative;
 }
 
 .card__answer:hover {
 	cursor: pointer;
-	background: linear-gradient(90deg, #454545, #212121);
+	background: linear-gradient(
+		90deg,
+		var(--hover-gradient-from),
+		var(--hover-gradient-to)
+	);
 }
 
 .card__answer_correct {
@@ -59,27 +68,71 @@
 }
 
 .card__checkbox {
-	margin-right: 10px;
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
 }
-
+/* 
 .card__checkbox:hover {
 	cursor: pointer;
+} */
+
+.card__checkbox:checked ~ .checkmark {
+	background-color: var(--toxic-color);
+}
+
+.checkmark {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	height: 25px;
+	width: 25px;
+	background-color: #fff;
+	border-radius: 50%;
+}
+
+.checkmark:after {
+	content: '';
+	position: absolute;
+	display: none;
+}
+
+.card__checkbox:checked ~ .checkmark::after {
+	display: block;
+}
+
+.checkmark:after {
+	left: 9px;
+	top: 5px;
+	width: 5px;
+	height: 10px;
+	border: solid black;
+	border-width: 0 3px 3px 0;
+	transform: rotate(45deg);
 }
 
 .card__btn {
 	margin-top: 10px;
 	height: 50px;
-	border: 1px solid #3f0;
+	border: 1px solid var(--toxic-color);
 	background-color: transparent;
-	color: #3f0;
+	color: var(--toxic-color);
 	font-size: 20px;
 	transition: 0.4s;
 }
 
 .card__btn:hover {
-	background-color: #3f0;
+	background-color: var(--toxic-color);
 	color: #181818;
 	cursor: pointer;
+}
+
+.card__btn_state_disabled {
+	border-color: gray;
+	color: gray;
+	pointer-events: none;
 }
 
 @media screen and (max-width: 425px) {
@@ -94,5 +147,19 @@
 	.card__btn {
 		height: 40px;
 		font-size: 16px;
+	}
+
+	.checkmark {
+		top: 8px;
+		left: 5px;
+		height: 20px;
+		width: 20px;
+	}
+
+	.checkmark:after {
+		left: 7px;
+		top: 3px;
+		width: 4px;
+		height: 8px;
 	}
 }
