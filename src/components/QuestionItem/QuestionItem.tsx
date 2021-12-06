@@ -1,6 +1,13 @@
-import React, { FC, MouseEvent, useState } from 'react'
+import React, { FC, MouseEvent, useMemo, useState } from 'react'
 import { IQuestion } from '../../types/types'
 import './QuestionItem.css'
+
+const pushToRandomIdx = (arr: string[], item: string) => {
+	const newArr = [...arr]
+	const randomIdx = Math.floor(Math.random() * (arr.length + 1))
+	newArr.splice(randomIdx, 0, item)
+	return newArr
+}
 
 interface QuestionItemProps {
 	question: IQuestion
@@ -20,13 +27,7 @@ const QuestionItem: FC<QuestionItemProps> = ({ question }) => {
 		}
 	}
 
-	// TODO: исправить баг, при котором на каждом рендере вызывается эта функция и все время шафлит варианты ответа
-	const pushToRandomIdx = (arr: string[], item: string) => {
-		const newArr = [...arr]
-		const randomIdx = Math.floor(Math.random() * (arr.length + 1))
-		newArr.splice(randomIdx, 0, item)
-		return newArr
-	}
+	const memoizedAnswers = useMemo(() => pushToRandomIdx(question.incorrect_answers, question.correct_answer), [question.incorrect_answers, question.correct_answer])
 
 	return (
 		<div className='card'>
@@ -38,7 +39,7 @@ const QuestionItem: FC<QuestionItemProps> = ({ question }) => {
 			</ul>
 			<form className='card__form'>
 				<ul className='card__answers'>
-					{pushToRandomIdx(question.incorrect_answers, question.correct_answer).map(
+					{memoizedAnswers.map(
 						(answer, index) => (
 							<li key={index}>
 								<label
