@@ -2,7 +2,9 @@ import React, { useEffect } from 'react'
 import { useActions } from '../../hooks/useActions'
 import { useTypeSelector } from '../../hooks/useTypeSelector'
 import { IQuestion } from '../../types/types'
+import Error from '../Error/Error'
 import List from '../List/List'
+import Loader from '../Loader/Loader'
 import QuestionItem from '../QuestionItem/QuestionItem'
 
 const App = () => {
@@ -14,11 +16,11 @@ const App = () => {
 	}, [])
 
 	if (loading) {
-		return <h1 style={{ backgroundColor: 'red' }}>Загрузка . . .</h1>
+		return <Loader />
 	}
 
 	if (error) {
-		return <h1 style={{ backgroundColor: 'red' }}>{error}</h1>
+		return <Error error={error} />
 	}
 
 	return (

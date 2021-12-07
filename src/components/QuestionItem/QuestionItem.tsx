@@ -26,14 +26,6 @@ const QuestionItem: FC<QuestionItemProps> = ({ question }) => {
 		[question.incorrect_answers, question.correct_answer]
 	)
 
-	const questionParsing = () => {
-		console.log(question.question.replace(/&quot;/g, 'ЗАЛУПА'))
-	}
-
-	useEffect(() => {
-		questionParsing()
-	}, [])
-
 	return (
 		<div className='card'>
 			<ul className='card__head'>
