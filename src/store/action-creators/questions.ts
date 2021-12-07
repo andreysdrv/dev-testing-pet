@@ -7,6 +7,7 @@ export const getData = () => {
 		try {
 			dispatch({ type: QuestionsActionTypes.GET_QUESTIONS })
 			const response = await axios.get('https://opentdb.com/api.php?amount=10')
+			console.log(response.data.results)
 			dispatch({
 				type: QuestionsActionTypes.GET_QUESTIONS_SUCCESS,
 				payload: response.data.results,
