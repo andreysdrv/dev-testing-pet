@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useLayoutEffect } from 'react'
 import { useActions } from '../../hooks/useActions'
 import { useTypeSelector } from '../../hooks/useTypeSelector'
 import { IQuestion } from '../../types/types'
@@ -11,7 +11,7 @@ const App = () => {
 	const { questions, loading, error } = useTypeSelector(state => state.questions)
 	const { getData } = useActions()
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		getData()
 	}, [])
 

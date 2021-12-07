@@ -6,12 +6,13 @@ export const getData = () => {
 	return async (dispatch: Dispatch<questionsAction>) => {
 		try {
 			dispatch({ type: QuestionsActionTypes.GET_QUESTIONS })
-			const response = await axios.get('https://opentdb.com/api.php?amount=10')
-			console.log(response.data.results)
-			dispatch({
-				type: QuestionsActionTypes.GET_QUESTIONS_SUCCESS,
-				payload: response.data.results,
-			})
+			setTimeout(async () => {
+				const response = await axios.get('https://opentdb.com/api.php?amount=10')
+				dispatch({
+					type: QuestionsActionTypes.GET_QUESTIONS_SUCCESS,
+					payload: response.data.results,
+				})
+			}, 1500)
 		} catch (error) {
 			dispatch({
 				type: QuestionsActionTypes.GET_QUESTIONS_FAIL,
